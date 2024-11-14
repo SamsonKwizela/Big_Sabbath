@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cavendish University Campus Ministry - Big Sabbath Attendance List</title>
+    <style>
+        /* Basic styling for the form */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2, h3 {
+            color: #4a148c;
+            text-align: center;
+            margin: 5px;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px 40px;
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            color: #4a148c;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4a148c;
+            color: #fff;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #6a1b9a;
+        }
+
+        /* Responsive layout for mobile devices */
+        @media (max-width: 600px) {
+            form {
+                padding: 15px 20px;
+            }
+
+            button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>Cavendish University Campus Ministry</h2>
+<h3>Big Sabbath Attendance List</h3>
+
+<form id="attendanceForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+    
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    
+    <button type="button" onclick="sendEmail()">Submit</button>
+</form>
+
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS
+    (function() {
+        emailjs.init("L12BrBhQ31lXvYf6u"); // Replace with your actual EmailJS user ID
+    })();
+
+    function sendEmail() {
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
+
+        // Prepare the email parameters
+        const templateParams = {
+            from_name: `${firstName} ${lastName}`,
+            to_email: "kwizelasamson@gmail.com",
+            message: `Big Sabbath Attendance Submission - Name: ${firstName} ${lastName}`
+        };
+
+        // Send the email
+        emailjs.send("service_vfayb9v", "template_ghtpvan", templateParams)
+            .then(function(response) {
+                alert("Thank you! Your attendance has been submitted.");
+            }, function(error) {
+                alert("There was an error submitting the form. Please try again.");
+                console.log('Failed...', error);
+            });
+    }
+</script>
+
+</body>
+</html>
